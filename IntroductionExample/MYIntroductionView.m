@@ -24,7 +24,6 @@
 //
 
 #import "MYIntroductionView.h"
-#import "RPCommonUtils.h"
 
 #define DEFAULT_BACKGROUND_COLOR [UIColor colorWithWhite:0 alpha:0.9]
 #define HEADER_VIEW_HEIGHT 38
