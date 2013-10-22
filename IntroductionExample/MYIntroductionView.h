@@ -26,6 +26,7 @@
 #import <UIKit/UIKit.h>
 #import "MYIntroductionPanel.h"
 #import <QuartzCore/QuartzCore.h>
+#import "StyledPageControl.h"
 
 typedef enum {
 MYFinishTypeSwipeOut = 0,
@@ -88,25 +89,29 @@ typedef enum {
 @property (nonatomic, retain) UIScrollView *ContentScrollView;
 
 //PageControl/Skip Button
-@property (nonatomic, retain) UIPageControl *PageControl;
+@property (nonatomic, retain) StyledPageControl *PageControl;
 @property (nonatomic, retain) UIButton *SkipButton;
+@property (nonatomic, strong) UILabel *stepLabel;
+@property (nonatomic) BOOL showStepLabel;
 
 //Nuts & Bolts
 @property BOOL device;
 @property BOOL device_orientation;
 
+@property (nonatomic, strong) UIColor *titleTextColor;
+@property (nonatomic, strong) UIColor *descriptionTextColor;
 
 /******************************/
 //Methods
 /******************************/
 
 //Custom Init Methods
-- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels;
-- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels;
-- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels languageDirection:(MYLanguageDirection)languageDirection;
-- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels languageDirection:(MYLanguageDirection)languageDirection;
-- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels;
-- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels languageDirection:(MYLanguageDirection)languageDirection;
+- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel;
+- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel;
+- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection;
+- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection;
+- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel;
+- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection;
 
 //Header Content
 -(void)setHeaderText:(NSString *)headerText;
@@ -119,6 +124,8 @@ typedef enum {
 //Show/Hide
 -(void)showInView:(UIView *)view animateDuration:(CGFloat)duration;
 -(void)hideWithFadeOutDuration:(CGFloat)duration;
+
+-(void)makePanelVisibleAtIndex:(NSInteger)panelIndex;
 
 
 @end

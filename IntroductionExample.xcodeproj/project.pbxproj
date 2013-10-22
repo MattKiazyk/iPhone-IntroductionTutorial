@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0097135D1817060C00544797 /* StyledPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0097135C1817060C00544797 /* StyledPageControl.m */; };
 		6C0E2DB817CE369400D18105 /* MYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E2DB717CE369300D18105 /* MYViewController.m */; };
 		F02BB21516E847B400E3D502 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02BB21416E847B400E3D502 /* UIKit.framework */; };
 		F02BB21716E847B400E3D502 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02BB21616E847B400E3D502 /* Foundation.framework */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0097135B1817060C00544797 /* StyledPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyledPageControl.h; sourceTree = "<group>"; };
+		0097135C1817060C00544797 /* StyledPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyledPageControl.m; sourceTree = "<group>"; };
 		6C0E2DB717CE369300D18105 /* MYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYViewController.m; sourceTree = "<group>"; };
 		F02BB21116E847B400E3D502 /* IntroductionExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntroductionExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02BB21416E847B400E3D502 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -133,6 +136,8 @@
 		F02BB24216E90F6A00E3D502 /* MYIntroductionView */ = {
 			isa = PBXGroup;
 			children = (
+				0097135B1817060C00544797 /* StyledPageControl.h */,
+				0097135C1817060C00544797 /* StyledPageControl.m */,
 				F02BB23716E847D600E3D502 /* MYIntroductionView.h */,
 				F02BB23816E847D600E3D502 /* MYIntroductionView.m */,
 				F02BB23F16E8576100E3D502 /* MYIntroductionPanel.h */,
@@ -215,6 +220,7 @@
 				F02BB22116E847B400E3D502 /* main.m in Sources */,
 				F02BB22516E847B400E3D502 /* MYAppDelegate.m in Sources */,
 				F02BB23916E847D600E3D502 /* MYIntroductionView.m in Sources */,
+				0097135D1817060C00544797 /* StyledPageControl.m in Sources */,
 				F02BB24116E8576100E3D502 /* MYIntroductionPanel.m in Sources */,
 				6C0E2DB817CE369400D18105 /* MYViewController.m in Sources */,
 			);

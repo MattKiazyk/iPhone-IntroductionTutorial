@@ -24,19 +24,18 @@
 //
 
 #import "MYIntroductionPanel.h"
-#import <QuartzCore/QuartzCore.h>
 
 @implementation MYIntroductionPanel
 
 -(id)initWithimage:(UIImage *)image title:(NSString *)title description:(NSString *)description{
     if (self = [super init]) {
         //Set panel Image
-        [self setupPanelContentViewWithImage:image];
-        
+        self.Image = [[UIImage alloc] init];
+        self.Image = image;
         self.Title = title;
         
         //Set panel Description
-        self.Description = [[NSString alloc] initWithString:description];
+        self.text = [[NSString alloc] initWithString:description];
     }
     return self;
 }
@@ -44,31 +43,14 @@
 -(id)initWithimage:(UIImage *)image description:(NSString *)description{
     if (self = [super init]) {
         //Set panel Image
-        [self setupPanelContentViewWithImage:image];
-        
+        self.Image = [[UIImage alloc] init];
+        self.Image = image;
         self.Title = @"";
         
         //Set panel Description
-        self.Description = [[NSString alloc] initWithString:description];
+        self.text = [[NSString alloc] initWithString:description];
     }
     return self;
-}
-
--(id)initWithContentView:(UIView*)view {
-    if(self = [super init]) {
-        self.PanelContentView = view;
-        self.Title = @"";
-        self.PanelContentView.clipsToBounds = YES;
-    }
-    return self;
-}
-
--(void)setupPanelContentViewWithImage:(UIImage*)image {
-    self.PanelContentView = [[UIImageView alloc] initWithImage:image];
-    self.PanelContentView.contentMode = UIViewContentModeScaleAspectFit;
-    self.PanelContentView.backgroundColor = [UIColor clearColor];
-    self.PanelContentView.layer.cornerRadius = 3;
-    self.PanelContentView.clipsToBounds = YES;
 }
 
 @end

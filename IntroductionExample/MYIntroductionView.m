@@ -24,13 +24,14 @@
 //
 
 #import "MYIntroductionView.h"
+#import "RPCommonUtils.h"
 
 #define DEFAULT_BACKGROUND_COLOR [UIColor colorWithWhite:0 alpha:0.9]
-#define HEADER_VIEW_HEIGHT 45
+#define HEADER_VIEW_HEIGHT 38
 #define PAGE_CONTROL_PADDING 1
-#define TITLE_FONT [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0]
+#define TITLE_FONT [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0]
 #define TITLE_TEXT_COLOR [UIColor whiteColor]
-#define DESCRIPTION_FONT [UIFont fontWithName:@"HelveticaNeue-Light" size:13.0]
+#define DESCRIPTION_FONT [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0]
 #define DESCRIPTION_TEXT_COLOR [UIColor whiteColor]
 
 @implementation MYIntroductionView
@@ -48,12 +49,15 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels
+- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         [self initializeClassVariables];
+        self.descriptionTextColor = descColor;
+        self.titleTextColor = textColor;
+        self.showStepLabel = showLabel;
         Panels = [panels copy];
         LanguageDirection = MYLanguageDirectionLeftToRight;
         [self buildUIWithFrame:frame headerViewVisible:YES];
@@ -63,12 +67,15 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels
+- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         [self initializeClassVariables];
+        self.descriptionTextColor = descColor;
+        self.titleTextColor = textColor;
+        self.showStepLabel = showLabel;
         Panels = [panels copy];
         LanguageDirection = MYLanguageDirectionLeftToRight;
         [self buildUIWithFrame:frame headerViewVisible:YES];
@@ -78,12 +85,15 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels languageDirection:(MYLanguageDirection)languageDirection
+- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         [self initializeClassVariables];
+        self.descriptionTextColor = descColor;
+        self.titleTextColor = textColor;
+        self.showStepLabel = showLabel;
         Panels = [panels copy];
         LanguageDirection = languageDirection;
         [self buildUIWithFrame:frame headerViewVisible:YES];
@@ -93,12 +103,15 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels languageDirection:(MYLanguageDirection)languageDirection
+- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         [self initializeClassVariables];
+        self.descriptionTextColor = descColor;
+        self.titleTextColor = textColor;
+        self.showStepLabel = showLabel;
         Panels = [panels copy];
         LanguageDirection = languageDirection;
         [self buildUIWithFrame:frame headerViewVisible:YES];
@@ -108,12 +121,15 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels
+- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         [self initializeClassVariables];
+        self.descriptionTextColor = descColor;
+        self.titleTextColor = textColor;
+                self.showStepLabel = showLabel;
         Panels = [panels copy];
         LanguageDirection = MYLanguageDirectionLeftToRight;
         [self buildUIWithFrame:frame headerViewVisible:NO];
@@ -122,12 +138,15 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels languageDirection:(MYLanguageDirection)languageDirection
+- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         [self initializeClassVariables];
+        self.descriptionTextColor = descColor;
+        self.titleTextColor = textColor;
+        self.showStepLabel = showLabel;
         Panels = [panels copy];
         LanguageDirection = languageDirection;
         [self buildUIWithFrame:frame headerViewVisible:NO];
@@ -177,13 +196,6 @@
     [self buildHeaderViewWithFrame:frame visible:headerViewVisible];
     [self buildContentScrollViewWithFrame:frame];
     [self buildFooterView];
-    
-    [self.BackgroundImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-    [self.HeaderImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [self.HeaderLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [self.HeaderView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [self.PageControl setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [self.SkipButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 }
 
 -(void)buildBackgroundImage{
@@ -200,12 +212,7 @@
         return;
     }
     
-    float headerYOffset = 5;
-    if ([MYIntroductionView runningiOS7]) {
-        headerYOffset = headerYOffset + 20;
-    }
-    
-    self.HeaderView = [[UIView alloc] initWithFrame:CGRectMake(5, headerYOffset, frame.size.width - 10, HEADER_VIEW_HEIGHT)]; //Leave 5px padding on all sides
+    self.HeaderView = [[UIView alloc] initWithFrame:CGRectMake(5, 15, frame.size.width - 10, HEADER_VIEW_HEIGHT)]; //Leave 5px padding on all sides
     self.HeaderView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     self.HeaderView.backgroundColor = [UIColor clearColor];
     
@@ -229,12 +236,10 @@
     [self addSubview:self.HeaderView];
     
     // Add a drop shadow to the header text
-    /*
     self.HeaderLabel.layer.shadowColor = [[UIColor blackColor]CGColor];
     self.HeaderLabel.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
     self.HeaderLabel.layer.shadowOpacity = 1.0f;
     self.HeaderLabel.layer.shadowRadius = 1.0f;
-     */
 }
 
 -(void)buildContentScrollViewWithFrame:(CGRect)frame{
@@ -244,7 +249,7 @@
         if (self.device_orientation == 1) { // 1 for landscape
            self.ContentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.HeaderView.frame.origin.y + self.HeaderView.frame.size.height - HEADER_VIEW_HEIGHT, frame.size.width, 0)];
         } else {
-            self.ContentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.HeaderView.frame.origin.y + self.HeaderView.frame.size.height, frame.size.width, 0)];
+            self.ContentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.HeaderView.frame.origin.y + self.HeaderView.frame.size.height - HEADER_VIEW_HEIGHT, frame.size.width, 0)];
         }
     } else { // iPad
         if (self.device_orientation == 1) { // 1 for landscape
@@ -294,7 +299,7 @@
     [self setContentScrollViewHeightForPanelIndex:0 animated:NO];
     
     //Add a view at the end. This is simply "something to scroll toward" on the final panel.
-    [self appendCloseViewAtXIndex:&contentXIndex];
+    //[self appendCloseViewAtXIndex:&contentXIndex];
     
     //Finally, resize the content size of the scrollview to account for all the new views added to it
     self.ContentScrollView.contentSize = CGSizeMake(contentXIndex, self.ContentScrollView.frame.size.height);
@@ -321,6 +326,7 @@
         panelViewIndex++;
     }
     
+    
     [self makePanelVisibleAtIndex:panelViews.count-1];
     self.CurrentPanelIndex = panelViews.count-1;
     self.PageControl.currentPage = panelViews.count -1;
@@ -341,108 +347,87 @@
     //Build panel now that we have all the desired dimensions
     UIView *panelView = [[UIView alloc] initWithFrame:CGRectMake(*xIndex, 0, self.ContentScrollView.frame.size.width, 0)];
     
-    CGFloat panelContentHeight = MIN(panel.PanelContentView.frame.size.height, self.frame.size.width - 10);
-    CGFloat panelContentWidth = MIN(panel.PanelContentView.frame.size.width, self.ContentScrollView.frame.size.width);
+    CGFloat imageHeight = MIN(panel.image.size.height, self.frame.size.width - 10);
+    if (imageHeight == 0) {
+        imageHeight = HEADER_VIEW_HEIGHT;
+    }
+    
     //Build title container (if applicable)
     CGRect panelTitleLabelFrame;
     UILabel *panelTitleLabel;
-    if (![panel.Title isEqualToString:@""]) {
-        float panelTitleHeight = 0;
-        if ([MYIntroductionView runningiOS7]) {
-            NSDictionary *stringAttributes = [NSDictionary dictionaryWithObject:TITLE_FONT forKey: NSFontAttributeName];
-            
-            panelTitleHeight = [panel.Title boundingRectWithSize:CGSizeMake(self.ContentScrollView.frame.size.width - 20, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:stringAttributes context:nil].size.height;
-            panelTitleHeight = ceilf(panelTitleHeight);
-        }
-        else {
-            panelTitleHeight = [panel.Title sizeWithFont:TITLE_FONT constrainedToSize:CGSizeMake(self.ContentScrollView.frame.size.width - 20, 100) lineBreakMode:NSLineBreakByWordWrapping].height;
-        }
-        
-        panelTitleLabelFrame = CGRectMake(10, panelContentHeight+5, self.ContentScrollView.frame.size.width - 20, panelTitleHeight);
+    if (![panel.title isEqualToString:@""]) {
+        panelTitleLabelFrame = CGRectMake(10, imageHeight+5, self.ContentScrollView.frame.size.width - 20, [panel.title sizeWithFont:TITLE_FONT constrainedToSize:CGSizeMake(self.ContentScrollView.frame.size.width - 20, 100) lineBreakMode:NSLineBreakByWordWrapping].height);
         panelTitleLabel = [[UILabel alloc] initWithFrame:panelTitleLabelFrame];
-        panelTitleLabel.text = panel.Title;
-        panelTitleLabel.numberOfLines = 0;
+        panelTitleLabel.text = panel.title;
         panelTitleLabel.font = TITLE_FONT;
-        panelTitleLabel.textColor = TITLE_TEXT_COLOR;
+        panelTitleLabel.textColor = self.titleTextColor;
         panelTitleLabel.backgroundColor = [UIColor clearColor];
         panelTitleLabel.textAlignment = NSTextAlignmentCenter;
         panelTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        panelTitleLabel.numberOfLines = 0;
+        
         // Add a drop shadow to the title text
-        /*
-        panelTitleLabel.layer.shadowColor = [[UIColor blackColor]CGColor];
-        panelTitleLabel.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-        panelTitleLabel.layer.shadowOpacity = 1.0f;
-        panelTitleLabel.layer.shadowRadius = 1.0f;
-         */
+//        panelTitleLabel.layer.shadowColor = [[UIColor blackColor]CGColor];
+//        panelTitleLabel.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+//        panelTitleLabel.layer.shadowOpacity = 1.0f;
+//        panelTitleLabel.layer.shadowRadius = 1.0f;
     }
     else {
-        panelTitleLabelFrame = CGRectMake(10, panelContentHeight+5, self.ContentScrollView.frame.size.width - 20, 0);
+        panelTitleLabelFrame = CGRectMake(10, imageHeight+5, self.ContentScrollView.frame.size.width - 20, 0);
         panelTitleLabel = [[UILabel alloc] initWithFrame:panelTitleLabelFrame];
     }
     [panelView addSubview:panelTitleLabel];
     
     //Build description container;
-    UILabel *panelDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.ContentScrollView.frame.size.width, 0)];
-    panelDescriptionLabel.backgroundColor = [UIColor clearColor];
-    panelDescriptionLabel.textAlignment = NSTextAlignmentCenter;
-    panelDescriptionLabel.textColor = DESCRIPTION_TEXT_COLOR;
-    panelDescriptionLabel.font = DESCRIPTION_FONT;
-    panelDescriptionLabel.numberOfLines = 0;
-    panelDescriptionLabel.text = panel.Description;
-    [panelDescriptionLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
-    [panelView addSubview:panelDescriptionLabel];
+    UITextView *panelDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, self.ContentScrollView.frame.size.width, 0)];
+    panelDescriptionTextView.scrollEnabled = NO;
+    panelDescriptionTextView.backgroundColor = [UIColor clearColor];
+    panelDescriptionTextView.textAlignment = NSTextAlignmentCenter;
+    panelDescriptionTextView.textColor = self.descriptionTextColor;
+    panelDescriptionTextView.font = DESCRIPTION_FONT;
+    panelDescriptionTextView.text = panel.text;
+    panelDescriptionTextView.editable = NO;
+    [panelDescriptionTextView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
+    
+    [panelView addSubview:panelDescriptionTextView];
     
     // Add a drop shadow to the description text
-    /*
-    panelDescriptionTextView.userInteractionEnabled = false;
-    panelDescriptionTextView.layer.shadowColor = [[UIColor blackColor]CGColor];
-    panelDescriptionTextView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-    panelDescriptionTextView.layer.shadowOpacity = 1.0f;
-    panelDescriptionTextView.layer.shadowRadius = 1.0f;
-     */
+//    panelDescriptionTextView.userInteractionEnabled = false;
+//    panelDescriptionTextView.layer.shadowColor = [[UIColor blackColor]CGColor];
+//    panelDescriptionTextView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+//    panelDescriptionTextView.layer.shadowOpacity = 1.0f;
+//    panelDescriptionTextView.layer.shadowRadius = 1.0f;
     
     //Gather a few layout parameters
     //Get the maximum size the description text could be (screenHeight-panelParentContainerOrigin - footersize)
-    
     CGFloat maxScrollViewHeight = self.frame.size.height - self.ContentScrollView.frame.origin.y - (36+PAGE_CONTROL_PADDING);
     
-    float panelDescriptionHeight = 0;
-    if ([MYIntroductionView runningiOS7]) {
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
-        
-        NSDictionary *stringAttributes = @{NSFontAttributeName:DESCRIPTION_FONT, NSParagraphStyleAttributeName:paragraphStyle};
-        
-        panelDescriptionHeight = [panel.Description boundingRectWithSize:CGSizeMake(self.ContentScrollView.frame.size.width - 20, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:stringAttributes context:nil].size.height;
-        panelDescriptionHeight = ceilf(panelDescriptionHeight);
-    }
-    else {
-        panelDescriptionHeight = [panel.Description sizeWithFont:DESCRIPTION_FONT constrainedToSize:CGSizeMake(self.ContentScrollView.frame.size.width - 20, 100) lineBreakMode:NSLineBreakByWordWrapping].height;
-    }
-    panelDescriptionHeight = panelDescriptionHeight + 10;
     
+    NSInteger descriptionHeight = panelDescriptionTextView.contentSize.height;
     int contentWrappedScrollViewHeight = 0;
-    if ((panelContentHeight + panelDescriptionHeight + panelTitleLabelFrame.size.height) > maxScrollViewHeight) {
+    if ((imageHeight + descriptionHeight + panelTitleLabelFrame.size.height) > maxScrollViewHeight) {
         contentWrappedScrollViewHeight = maxScrollViewHeight;
-        panelContentHeight = contentWrappedScrollViewHeight-panelDescriptionHeight - panelTitleLabelFrame.size.height - 10;
+        imageHeight = contentWrappedScrollViewHeight-descriptionHeight - panelTitleLabelFrame.size.height - 10;
     }
-    else if ((panelContentHeight+panelDescriptionHeight + panelTitleLabelFrame.size.height) <= maxScrollViewHeight){
-        contentWrappedScrollViewHeight = panelContentHeight + panelTitleLabelFrame.size.height + panelDescriptionHeight;
+    else if ((imageHeight+descriptionHeight + panelTitleLabelFrame.size.height) <= maxScrollViewHeight){
+        contentWrappedScrollViewHeight = imageHeight + panelTitleLabelFrame.size.height + descriptionHeight;
     }
 
     panelView.frame = CGRectMake(*xIndex, 0, self.ContentScrollView.frame.size.width, contentWrappedScrollViewHeight);
     
-    //Build panel container
-    panel.PanelContentView.frame = (CGRect) {
-        .origin = CGPointMake(5 + self.ContentScrollView.frame.size.width/2 - panelContentWidth/2, 0),
-        .size = CGSizeMake(panelContentWidth, panelContentHeight),
-    };
-    [panelView addSubview:panel.PanelContentView];
+    //Build image container
+    UIImageView *panelImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, self.ContentScrollView.frame.size.width - 10, imageHeight)];
+    panelImageView.contentMode = UIViewContentModeScaleAspectFit;
+    panelImageView.backgroundColor = [UIColor clearColor];
+    panelImageView.image = panel.image;
+    panelImageView.layer.cornerRadius = 3;
+    panelImageView.clipsToBounds = YES;
+    [panelView addSubview:panelImageView];
     
     
     //Update frames based on the new/scaled image size we just gathered
-    panelTitleLabel.frame = CGRectMake(10, panelContentHeight + 5, panelTitleLabel.frame.size.width, panelTitleLabel.frame.size.height);
-    panelDescriptionLabel.frame = CGRectMake(0, panelContentHeight + panelTitleLabel.frame.size.height + 5, self.ContentScrollView.frame.size.width, panelDescriptionHeight);
+    panelTitleLabel.frame = CGRectMake(10, imageHeight + 5, panelTitleLabel.frame.size.width, panelTitleLabel.frame.size.height);
+    panelDescriptionTextView.frame = CGRectMake(0, imageHeight + panelTitleLabel.frame.size.height + 5, self.ContentScrollView.frame.size.width, descriptionHeight);
     
     //Update xIndex
     *xIndex += self.ContentScrollView.frame.size.width;
@@ -458,34 +443,14 @@
      *xIndex += self.ContentScrollView.frame.size.width;
 }
 
--(void)showPanelAtPageControl {
-    
-    LastPanelIndex = self.PageControl.currentPage;
-    self.CurrentPanelIndex = self.PageControl.currentPage;
-    
-    //Format and show new content
-    [self setContentScrollViewHeightForPanelIndex:self.CurrentPanelIndex animated:YES];
-    [self makePanelVisibleAtIndex:(NSInteger)self.CurrentPanelIndex];
-    
-    [self.ContentScrollView setContentOffset:CGPointMake(self.CurrentPanelIndex * 320, 0) animated:YES];
-    //Call Back, if applicable
-    if (LastPanelIndex != self.CurrentPanelIndex) { //Keeps from making the callback when just bouncing and not actually changing pages
-        if ([(id)delegate respondsToSelector:@selector(introductionDidChangeToPanel:withIndex:)]) {
-            [delegate introductionDidChangeToPanel:Panels[self.CurrentPanelIndex] withIndex:self.CurrentPanelIndex];
-        }
-    }
-}
-
 -(void)buildFooterView{
     //Build Page Control
     if (self.device == 1) {
-        self.PageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING), self.frame.size.width, 36)];
+        self.PageControl = [[StyledPageControl alloc] initWithFrame:CGRectMake(0, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + (PAGE_CONTROL_PADDING * self.showStepLabel ? 4 : 1)), self.frame.size.width, 36)];
     } else {
-        self.PageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((self.frame.size.width - 185)/2, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING), 185, 36)];
+        self.PageControl = [[StyledPageControl alloc] initWithFrame:CGRectMake((self.frame.size.width - 185)/2, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + (PAGE_CONTROL_PADDING * self.showStepLabel ? 4: 1)), 185, 36)];
     }
     [self.PageControl setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [self.PageControl addTarget:self action:@selector(showPanelAtPageControl) forControlEvents:UIControlEventValueChanged];
-
     self.PageControl.numberOfPages = Panels.count;
     [self addSubview:self.PageControl];
     
@@ -494,34 +459,48 @@
     if (LanguageDirection == MYLanguageDirectionRightToLeft) {
         self.SkipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.PageControl.frame.origin.y, 80, self.PageControl.frame.size.height)];
         self.PageControl.currentPage = panelViews.count - 1;
+        
     }
     else {
 //        self.SkipButton = [[UIButton alloc] initWithFrame:CGRectMake(self.ContentScrollView.frame.size.width - 80, self.PageControl.frame.origin.y, 80, self.PageControl.frame.size.height)];
-        self.SkipButton = [[UIButton alloc] initWithFrame:CGRectMake(self.ContentScrollView.frame.size.width - 80, self.PageControl.frame.origin.y, 80, self.PageControl.frame.size.height)];
+        self.SkipButton = [[UIButton alloc] initWithFrame:CGRectMake(self.ContentScrollView.frame.size.height - 80, self.PageControl.frame.origin.y, 80, self.PageControl.frame.size.height)];
     }
     
     [self.SkipButton setAutoresizingMask: UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
-    [self.SkipButton setTitle:NSLocalizedString(@"Skip", nil) forState:UIControlStateNormal];
+    [self.SkipButton setTitle:@"Skip" forState:UIControlStateNormal];
     [self.SkipButton addTarget:self action:@selector(skipIntroduction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.SkipButton];
+    
+    self.stepLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING * 2, self.frame.size.width, 36)];
+    [self.stepLabel setBackgroundColor:[UIColor clearColor]];
+    self.stepLabel.font = TITLE_FONT;
+    self.stepLabel.textAlignment = NSTextAlignmentCenter;
+    self.stepLabel.textColor = self.titleTextColor;
+    [self.stepLabel setHidden:!self.showStepLabel];
+    [self addSubview:self.stepLabel];
+    
+    [self.stepLabel setText:[NSString stringWithFormat:@"Step %i out of %i", self.CurrentPanelIndex + 1, self.PageControl.numberOfPages]];
+
 }
 
 -(void)setContentScrollViewHeightForPanelIndex:(NSInteger)panelIndex animated:(BOOL)animated{
     CGFloat newPanelHeight = [panelViews[panelIndex] frame].size.height;
     
+    
     if (animated){
         [UIView animateWithDuration:0.3 animations:^{
             self.ContentScrollView.frame = CGRectMake(self.ContentScrollView.frame.origin.x, self.ContentScrollView.frame.origin.y, self.ContentScrollView.frame.size.width, newPanelHeight);
-            self.PageControl.frame = CGRectMake(self.PageControl.frame.origin.x, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING), self.PageControl.frame.size.width, self.PageControl.frame.size.height);
+            self.PageControl.frame = CGRectMake(self.PageControl.frame.origin.x, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING * (self.showStepLabel ? 2 : 1)), self.PageControl.frame.size.width, self.PageControl.frame.size.height);
             
-            self.SkipButton.frame = CGRectMake(self.SkipButton.frame.origin.x, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING), self.SkipButton.frame.size.width, self.SkipButton.frame.size.height);
+            self.SkipButton.frame = CGRectMake(self.SkipButton.frame.origin.x, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING * (self.showStepLabel ? 2 : 1)), self.SkipButton.frame.size.width, self.SkipButton.frame.size.height);
+            
         }];
     }
     else {
         self.ContentScrollView.frame = CGRectMake(self.ContentScrollView.frame.origin.x, self.ContentScrollView.frame.origin.y, self.ContentScrollView.frame.size.width, newPanelHeight);
         
-        self.PageControl.frame = CGRectMake(self.PageControl.frame.origin.x, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING), self.PageControl.frame.size.width, self.PageControl.frame.size.height);
-        self.SkipButton.frame = CGRectMake(self.SkipButton.frame.origin.x, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING), self.SkipButton.frame.size.width, self.SkipButton.frame.size.height);
+        self.PageControl.frame = CGRectMake(self.PageControl.frame.origin.x, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING * (self.showStepLabel ? 2 : 1)), self.PageControl.frame.size.width, self.PageControl.frame.size.height);
+        self.SkipButton.frame = CGRectMake(self.SkipButton.frame.origin.x, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING * (self.showStepLabel ? 2 : 1)), self.SkipButton.frame.size.width, self.SkipButton.frame.size.height);
         
     }
 
@@ -558,12 +537,19 @@
 
 -(void)showInView:(UIView *)view animateDuration:(CGFloat)duration{
     //Add introduction view
+    
+    CGRect originalFrame = self.frame;
+    originalFrame.origin.y  -= self.frame.size.height;
+    //self.frame = originalFrame;
+    
     self.alpha = 0;
     [view addSubview:self];
     
+    originalFrame.origin.y = 0;
     //Fade in
     [UIView animateWithDuration:duration animations:^{
         self.alpha = 1;
+        //self.frame = originalFrame;
     }];
 }
 
@@ -572,6 +558,7 @@
     [UIView animateWithDuration:duration animations:^{
         self.alpha = 0;
     } completion:nil];
+    
 }
 
 -(void)makePanelVisibleAtIndex:(NSInteger)panelIndex{
@@ -625,7 +612,7 @@
             //Update Page Control
             LastPanelIndex = self.PageControl.currentPage;
             self.PageControl.currentPage = self.CurrentPanelIndex;
-            
+            [self.stepLabel setText:[NSString stringWithFormat:@"Step %i out of %i", self.CurrentPanelIndex + 1, self.PageControl.numberOfPages]];
             //Format and show new content
             [self setContentScrollViewHeightForPanelIndex:self.CurrentPanelIndex animated:YES];
             [self makePanelVisibleAtIndex:(NSInteger)self.CurrentPanelIndex];
@@ -651,6 +638,7 @@
             //Update Page Control
             LastPanelIndex = self.PageControl.currentPage;
             self.PageControl.currentPage = self.CurrentPanelIndex;
+            [self.stepLabel setText:[NSString stringWithFormat:@"Step %i out of %i", self.CurrentPanelIndex + 1, self.PageControl.numberOfPages]];
             
             //Format and show new content
             [self setContentScrollViewHeightForPanelIndex:self.CurrentPanelIndex animated:YES];
@@ -679,15 +667,5 @@
     }
 }
 
-#pragma mark - Support Methods
-
-+(BOOL)runningiOS7{
-    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
-    if (currSysVer.floatValue >= 7.0) {
-        return YES;
-    }
-    
-    return NO;
-}
 
 @end
