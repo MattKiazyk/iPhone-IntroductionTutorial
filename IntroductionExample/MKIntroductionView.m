@@ -23,7 +23,7 @@
 //  SOFTWARE.
 //
 
-#import "MYIntroductionView.h"
+#import "MKIntroductionView.h"
 
 #define DEFAULT_BACKGROUND_COLOR [UIColor colorWithWhite:0 alpha:0.9]
 #define HEADER_VIEW_HEIGHT 38
@@ -33,7 +33,7 @@
 #define DESCRIPTION_FONT [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0]
 #define DESCRIPTION_TEXT_COLOR [UIColor whiteColor]
 
-@implementation MYIntroductionView
+@implementation MKIntroductionView
 @synthesize delegate, device, device_orientation;
 
 - (id)initWithFrame:(CGRect)frame
@@ -84,7 +84,7 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection
+- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MKLanguageDirection)languageDirection
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -102,7 +102,7 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection
+- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MKLanguageDirection)languageDirection
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -137,7 +137,7 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection
+- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MKLanguageDirection)languageDirection
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -341,7 +341,7 @@
     [self addSubview:self.ContentScrollView];
 }
 
--(UIView *)PanelViewForPanel:(MYIntroductionPanel *)panel atXIndex:(CGFloat*)xIndex{
+-(UIView *)PanelViewForPanel:(MKIntroductionPanel *)panel atXIndex:(CGFloat*)xIndex{
     
     //Build panel now that we have all the desired dimensions
     UIView *panelView = [[UIView alloc] initWithFrame:CGRectMake(*xIndex, 0, self.ContentScrollView.frame.size.width, 0)];

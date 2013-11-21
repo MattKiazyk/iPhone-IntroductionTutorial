@@ -1,5 +1,5 @@
 //
-//  MYIntroductionPanel.h
+//  MYIntroductionPanel.m
 //  IntroductionExample
 //
 //  Copyright (C) 2013, Matt York
@@ -23,22 +23,34 @@
 //  SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "MKIntroductionPanel.h"
 
-@interface MYIntroductionPanel : NSObject
+@implementation MKIntroductionPanel
 
-//Image
-@property (nonatomic, strong) UIImage *image;
+-(id)initWithimage:(UIImage *)image title:(NSString *)title description:(NSString *)description{
+    if (self = [super init]) {
+        //Set panel Image
+        self.Image = [[UIImage alloc] init];
+        self.Image = image;
+        self.Title = title;
+        
+        //Set panel Description
+        self.text = [[NSString alloc] initWithString:description];
+    }
+    return self;
+}
 
-//Title
-@property (nonatomic, strong) NSString *title;
-
-//Description
-@property (nonatomic, strong) NSString *text;
-
-//Custom init method
--(id)initWithimage:(UIImage *)image title:(NSString *)title description:(NSString *)description;
--(id)initWithimage:(UIImage *)image description:(NSString *)description;
-
+-(id)initWithimage:(UIImage *)image description:(NSString *)description{
+    if (self = [super init]) {
+        //Set panel Image
+        self.Image = [[UIImage alloc] init];
+        self.Image = image;
+        self.Title = @"";
+        
+        //Set panel Description
+        self.text = [[NSString alloc] initWithString:description];
+    }
+    return self;
+}
 
 @end

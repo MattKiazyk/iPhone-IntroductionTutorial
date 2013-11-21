@@ -19,8 +19,8 @@
 		F02BB22916E847B400E3D502 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F02BB22816E847B400E3D502 /* Default@2x.png */; };
 		F02BB22B16E847B400E3D502 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F02BB22A16E847B400E3D502 /* Default-568h@2x.png */; };
 		F02BB23116E847B400E3D502 /* MYViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F02BB22F16E847B400E3D502 /* MYViewController.xib */; };
-		F02BB23916E847D600E3D502 /* MYIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F02BB23816E847D600E3D502 /* MYIntroductionView.m */; };
-		F02BB24116E8576100E3D502 /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = F02BB24016E8576100E3D502 /* MYIntroductionPanel.m */; };
+		F02BB23916E847D600E3D502 /* MKIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F02BB23816E847D600E3D502 /* MKIntroductionView.m */; };
+		F02BB24116E8576100E3D502 /* MKIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = F02BB24016E8576100E3D502 /* MKIntroductionPanel.m */; };
 		F02BB24816E961B300E3D502 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02BB24716E961B300E3D502 /* QuartzCore.framework */; };
 		F02BB25A16E9991F00E3D502 /* SampleHeaderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = F02BB25916E9991F00E3D502 /* SampleHeaderImage.png */; };
 		F02BB26816E9A67C00E3D502 /* SampleBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F02BB26716E9A67C00E3D502 /* SampleBackground.png */; };
@@ -47,10 +47,10 @@
 		F02BB22A16E847B400E3D502 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F02BB22C16E847B400E3D502 /* MYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYViewController.h; sourceTree = "<group>"; };
 		F02BB23016E847B400E3D502 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MYViewController.xib; sourceTree = "<group>"; };
-		F02BB23716E847D600E3D502 /* MYIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYIntroductionView.h; sourceTree = "<group>"; };
-		F02BB23816E847D600E3D502 /* MYIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYIntroductionView.m; sourceTree = "<group>"; };
-		F02BB23F16E8576100E3D502 /* MYIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYIntroductionPanel.h; sourceTree = "<group>"; };
-		F02BB24016E8576100E3D502 /* MYIntroductionPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYIntroductionPanel.m; sourceTree = "<group>"; };
+		F02BB23716E847D600E3D502 /* MKIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKIntroductionView.h; sourceTree = "<group>"; };
+		F02BB23816E847D600E3D502 /* MKIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKIntroductionView.m; sourceTree = "<group>"; };
+		F02BB23F16E8576100E3D502 /* MKIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKIntroductionPanel.h; sourceTree = "<group>"; };
+		F02BB24016E8576100E3D502 /* MKIntroductionPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKIntroductionPanel.m; sourceTree = "<group>"; };
 		F02BB24716E961B300E3D502 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F02BB25916E9991F00E3D502 /* SampleHeaderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleHeaderImage.png; sourceTree = "<group>"; };
 		F02BB26716E9A67C00E3D502 /* SampleBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleBackground.png; sourceTree = "<group>"; };
@@ -138,10 +138,10 @@
 			children = (
 				0097135B1817060C00544797 /* StyledPageControl.h */,
 				0097135C1817060C00544797 /* StyledPageControl.m */,
-				F02BB23716E847D600E3D502 /* MYIntroductionView.h */,
-				F02BB23816E847D600E3D502 /* MYIntroductionView.m */,
-				F02BB23F16E8576100E3D502 /* MYIntroductionPanel.h */,
-				F02BB24016E8576100E3D502 /* MYIntroductionPanel.m */,
+				F02BB23716E847D600E3D502 /* MKIntroductionView.h */,
+				F02BB23816E847D600E3D502 /* MKIntroductionView.m */,
+				F02BB23F16E8576100E3D502 /* MKIntroductionPanel.h */,
+				F02BB24016E8576100E3D502 /* MKIntroductionPanel.m */,
 			);
 			name = MYIntroductionView;
 			sourceTree = "<group>";
@@ -219,9 +219,9 @@
 			files = (
 				F02BB22116E847B400E3D502 /* main.m in Sources */,
 				F02BB22516E847B400E3D502 /* MYAppDelegate.m in Sources */,
-				F02BB23916E847D600E3D502 /* MYIntroductionView.m in Sources */,
+				F02BB23916E847D600E3D502 /* MKIntroductionView.m in Sources */,
 				0097135D1817060C00544797 /* StyledPageControl.m in Sources */,
-				F02BB24116E8576100E3D502 /* MYIntroductionPanel.m in Sources */,
+				F02BB24116E8576100E3D502 /* MKIntroductionPanel.m in Sources */,
 				6C0E2DB817CE369400D18105 /* MYViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

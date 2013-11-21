@@ -24,7 +24,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MYIntroductionView.h"
+#import "MKIntroductionView.h"
 
 @interface MYViewController : UIViewController <MYIntroductionDelegate>
 

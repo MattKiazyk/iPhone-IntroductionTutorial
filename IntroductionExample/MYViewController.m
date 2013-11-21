@@ -41,10 +41,10 @@
 -(void)viewDidAppear:(BOOL)animated{
     
     //STEP 1 Construct Panels
-    MYIntroductionPanel *panel = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"SampleImage1"] title:@"Sample Title" description:@"Welcome to MYIntroductionView, your 100 percent customizable interface for introductions and tutorials! Simply add a few classes to your project, and you are ready to go!" ];
+    MKIntroductionPanel *panel = [[MKIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"SampleImage1"] title:@"Sample Title" description:@"Welcome to MYIntroductionView, your 100 percent customizable interface for introductions and tutorials! Simply add a few classes to your project, and you are ready to go!" ];
     
     //You may also add in a title for each panel
-    MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"SampleImage2"] title:@"Your Ticket!" description:@"MYIntroductionView is your ticket to a great tutorial or introduction!"];
+    MKIntroductionPanel *panel2 = [[MKIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"SampleImage2"] title:@"Your Ticket!" description:@"MYIntroductionView is your ticket to a great tutorial or introduction!"];
     
     //STEP 2 Create IntroductionView
     /*A standard version*/
@@ -54,7 +54,7 @@
    // MYIntroductionView *introductionView = [[MYIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) panels:@[panel, panel2]];
     
     /*A more customized version*/
-    MYIntroductionView *introductionView = [[MYIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) headerText:@"MYIntroductionView" panels:@[panel, panel2] languageDirection:MYLanguageDirectionLeftToRight];
+    MKIntroductionView *introductionView = [[MKIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) headerText:@"MYIntroductionView" panels:@[panel, panel2] languageDirection:MYLanguageDirectionLeftToRight];
     [introductionView setBackgroundImage:[UIImage imageNamed:@"SampleBackground"]];
     
     /*
@@ -87,7 +87,7 @@
 
 #pragma mark - Sample Delegate Methods
 
--(void)introductionDidFinishWithType:(MYFinishType)finishType{
+-(void)introductionDidFinishWithType:(MKFinishType)finishType{
     if (finishType == MYFinishTypeSkipButton) {
         NSLog(@"Did Finish Introduction By Skipping It");
     }
@@ -99,7 +99,7 @@
     // I didn't do this to keep things simple for the sake of example.
 }
 
--(void)introductionDidChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex{
+-(void)introductionDidChangeToPanel:(MKIntroductionPanel *)panel withIndex:(NSInteger)panelIndex{
     NSLog(@"%@ \nPanelIndex: %d", panel.Description, panelIndex);
 }
 

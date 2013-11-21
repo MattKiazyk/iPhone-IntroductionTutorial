@@ -24,34 +24,34 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MYIntroductionPanel.h"
+#import "MKIntroductionPanel.h"
 #import <QuartzCore/QuartzCore.h>
 #import "StyledPageControl.h"
 
 typedef enum {
 MYFinishTypeSwipeOut = 0,
     MYFinishTypeSkipButton
-}MYFinishType;
+}MKFinishType;
 
 typedef enum {
     MYLanguageDirectionLeftToRight = 0,
     MYLanguageDirectionRightToLeft
-}MYLanguageDirection;
+}MKLanguageDirection;
 
 /******************************/
 //Delegate Method Declarations
 /******************************/
 @protocol MYIntroductionDelegate
 @optional
--(void)introductionDidFinishWithType:(MYFinishType)finishType;
--(void)introductionDidChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex;
+-(void)introductionDidFinishWithType:(MKFinishType)finishType;
+-(void)introductionDidChangeToPanel:(MKIntroductionPanel *)panel withIndex:(NSInteger)panelIndex;
 @end
 
 
 /******************************/
 //MYIntroductionView
 /******************************/
-@interface MYIntroductionView : UIView <UIScrollViewDelegate>{
+@interface MKIntroductionView : UIView <UIScrollViewDelegate>{
     
     //Array of panel objects passed in at initialization
     NSArray *Panels;
@@ -63,7 +63,7 @@ typedef enum {
     NSInteger LastPanelIndex;
     
     //Variable keeping track of language direction
-    MYLanguageDirection LanguageDirection;
+    MKLanguageDirection LanguageDirection;
 }
 
 
@@ -108,10 +108,10 @@ typedef enum {
 //Custom Init Methods
 - (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel;
 - (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel;
-- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection;
-- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection;
+- (id)initWithFrame:(CGRect)frame headerText:(NSString *)headerText panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MKLanguageDirection)languageDirection;
+- (id)initWithFrame:(CGRect)frame headerImage:(UIImage *)headerImage panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MKLanguageDirection)languageDirection;
 - (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel;
-- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MYLanguageDirection)languageDirection;
+- (id)initWithFrame:(CGRect)frame panels:(NSArray *)panels titleTextColor:(UIColor *)textColor descTextColor:(UIColor *)descColor showStepLabel:(BOOL)showLabel languageDirection:(MKLanguageDirection)languageDirection;
 
 //Header Content
 -(void)setHeaderText:(NSString *)headerText;
