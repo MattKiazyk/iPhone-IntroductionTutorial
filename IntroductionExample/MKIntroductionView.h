@@ -29,7 +29,7 @@
 #import "StyledPageControl.h"
 
 typedef enum {
-MYFinishTypeSwipeOut = 0,
+    MYFinishTypeSwipeOut = 0,
     MYFinishTypeSkipButton
 }MKFinishType;
 
@@ -127,5 +127,5 @@ typedef enum {
 
 -(void)makePanelVisibleAtIndex:(NSInteger)panelIndex;
 
-
++(BOOL)runningiOS7;
 @end

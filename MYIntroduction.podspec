@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'MYIntroduction'
-  s.version      = '0.2.7'
+  s.version      = '0.2.8'
   s.summary      = 'Solution for building stylish app introductions and tutorials.'
   s.homepage     = 'https://github.com/MatthewYork/iPhone-IntroductionTutorial'
 
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.author       = { "Matthew York" => "my3681@gmail.com" }
 
   s.source       = { :git => "https://github.com/MattKiazyk/iPhone-IntroductionTutorial.git", 
-                     :tag => "0.2.7" }
+                     :tag => "0.2.8" }
 
   s.platform = :ios, '5.0'
   s.requires_arc = true

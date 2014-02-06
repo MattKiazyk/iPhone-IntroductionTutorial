@@ -128,7 +128,7 @@
         [self initializeClassVariables];
         self.descriptionTextColor = descColor;
         self.titleTextColor = textColor;
-                self.showStepLabel = showLabel;
+        self.showStepLabel = showLabel;
         Panels = [panels copy];
         LanguageDirection = MYLanguageDirectionLeftToRight;
         [self buildUIWithFrame:frame headerViewVisible:NO];
@@ -246,7 +246,7 @@
     float outerPadding = 0;
     if (self.device == 0) { // iPhone
         if (self.device_orientation == 1) { // 1 for landscape
-           self.ContentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.HeaderView.frame.origin.y + self.HeaderView.frame.size.height - HEADER_VIEW_HEIGHT, frame.size.width, 0)];
+            self.ContentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.HeaderView.frame.origin.y + self.HeaderView.frame.size.height - HEADER_VIEW_HEIGHT, frame.size.width, 0)];
         } else {
             self.ContentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.HeaderView.frame.origin.y + self.HeaderView.frame.size.height - HEADER_VIEW_HEIGHT, frame.size.width, 0)];
         }
@@ -355,7 +355,10 @@
     CGRect panelTitleLabelFrame;
     UILabel *panelTitleLabel;
     if (![panel.title isEqualToString:@""]) {
-        panelTitleLabelFrame = CGRectMake(10, imageHeight+5, self.ContentScrollView.frame.size.width - 20, [panel.title sizeWithFont:TITLE_FONT constrainedToSize:CGSizeMake(self.ContentScrollView.frame.size.width - 20, 100) lineBreakMode:NSLineBreakByWordWrapping].height);
+        
+        CGFloat titleHeight = [panel.title sizeWithFont:TITLE_FONT constrainedToSize:CGSizeMake(self.ContentScrollView.frame.size.width - 20, 100) lineBreakMode:NSLineBreakByWordWrapping].height;
+        
+        panelTitleLabelFrame = CGRectMake(10, imageHeight+5, self.ContentScrollView.frame.size.width - 20,titleHeight);
         panelTitleLabel = [[UILabel alloc] initWithFrame:panelTitleLabelFrame];
         panelTitleLabel.text = panel.title;
         panelTitleLabel.font = TITLE_FONT;
@@ -366,10 +369,10 @@
         panelTitleLabel.numberOfLines = 0;
         
         // Add a drop shadow to the title text
-//        panelTitleLabel.layer.shadowColor = [[UIColor blackColor]CGColor];
-//        panelTitleLabel.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-//        panelTitleLabel.layer.shadowOpacity = 1.0f;
-//        panelTitleLabel.layer.shadowRadius = 1.0f;
+        //        panelTitleLabel.layer.shadowColor = [[UIColor blackColor]CGColor];
+        //        panelTitleLabel.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+        //        panelTitleLabel.layer.shadowOpacity = 1.0f;
+        //        panelTitleLabel.layer.shadowRadius = 1.0f;
     }
     else {
         panelTitleLabelFrame = CGRectMake(10, imageHeight+5, self.ContentScrollView.frame.size.width - 20, 0);
@@ -387,22 +390,22 @@
     panelDescriptionTextView.text = panel.text;
     panelDescriptionTextView.editable = NO;
     [panelDescriptionTextView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
-    
+    [panelDescriptionTextView sizeToFit];
     [panelView addSubview:panelDescriptionTextView];
     
     // Add a drop shadow to the description text
-//    panelDescriptionTextView.userInteractionEnabled = false;
-//    panelDescriptionTextView.layer.shadowColor = [[UIColor blackColor]CGColor];
-//    panelDescriptionTextView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-//    panelDescriptionTextView.layer.shadowOpacity = 1.0f;
-//    panelDescriptionTextView.layer.shadowRadius = 1.0f;
+    //    panelDescriptionTextView.userInteractionEnabled = false;
+    //    panelDescriptionTextView.layer.shadowColor = [[UIColor blackColor]CGColor];
+    //    panelDescriptionTextView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    //    panelDescriptionTextView.layer.shadowOpacity = 1.0f;
+    //    panelDescriptionTextView.layer.shadowRadius = 1.0f;
     
     //Gather a few layout parameters
     //Get the maximum size the description text could be (screenHeight-panelParentContainerOrigin - footersize)
     CGFloat maxScrollViewHeight = self.frame.size.height - self.ContentScrollView.frame.origin.y - (36+PAGE_CONTROL_PADDING);
     
     
-    NSInteger descriptionHeight = panelDescriptionTextView.contentSize.height;
+    NSInteger descriptionHeight = panelDescriptionTextView.frame.size.height;
     int contentWrappedScrollViewHeight = 0;
     if ((imageHeight + descriptionHeight + panelTitleLabelFrame.size.height) > maxScrollViewHeight) {
         contentWrappedScrollViewHeight = maxScrollViewHeight;
@@ -411,7 +414,7 @@
     else if ((imageHeight+descriptionHeight + panelTitleLabelFrame.size.height) <= maxScrollViewHeight){
         contentWrappedScrollViewHeight = imageHeight + panelTitleLabelFrame.size.height + descriptionHeight;
     }
-
+    
     panelView.frame = CGRectMake(*xIndex, 0, self.ContentScrollView.frame.size.width, contentWrappedScrollViewHeight);
     
     //Build image container
@@ -439,7 +442,7 @@
     
     [self.ContentScrollView addSubview:closeView];
     
-     *xIndex += self.ContentScrollView.frame.size.width;
+    *xIndex += self.ContentScrollView.frame.size.width;
 }
 
 -(void)buildFooterView{
@@ -461,7 +464,7 @@
         
     }
     else {
-//        self.SkipButton = [[UIButton alloc] initWithFrame:CGRectMake(self.ContentScrollView.frame.size.width - 80, self.PageControl.frame.origin.y, 80, self.PageControl.frame.size.height)];
+        //        self.SkipButton = [[UIButton alloc] initWithFrame:CGRectMake(self.ContentScrollView.frame.size.width - 80, self.PageControl.frame.origin.y, 80, self.PageControl.frame.size.height)];
         self.SkipButton = [[UIButton alloc] initWithFrame:CGRectMake(self.ContentScrollView.frame.size.height - 80, self.PageControl.frame.origin.y, 80, self.PageControl.frame.size.height)];
     }
     
@@ -479,7 +482,7 @@
     [self addSubview:self.stepLabel];
     
     [self.stepLabel setText:[NSString stringWithFormat:@"Step %i out of %i", self.CurrentPanelIndex + 1, self.PageControl.numberOfPages]];
-
+    
 }
 
 -(void)setContentScrollViewHeightForPanelIndex:(NSInteger)panelIndex animated:(BOOL)animated{
@@ -502,7 +505,7 @@
         self.SkipButton.frame = CGRectMake(self.SkipButton.frame.origin.x, (self.ContentScrollView.frame.origin.y + self.ContentScrollView.frame.size.height + PAGE_CONTROL_PADDING * (self.showStepLabel ? 2 : 1)), self.SkipButton.frame.size.width, self.SkipButton.frame.size.height);
         
     }
-
+    
     self.ContentScrollView.contentSize = CGSizeMake(self.ContentScrollView.contentSize.width, newPanelHeight);
 }
 
@@ -665,6 +668,13 @@
         }
     }
 }
-
++(BOOL)runningiOS7{
+    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+    if (currSysVer.floatValue >= 7.0) {
+        return YES;
+    }
+    
+    return NO;
+}
 
 @end
